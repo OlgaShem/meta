@@ -2,6 +2,10 @@
 import { useState } from "react";
 import "./App.css";
 
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+
+import Thank from "./ThankYou";
+
 const benefits = [
   {
     number: "01",
@@ -33,7 +37,8 @@ const benefits = [
   },
 ];
 
-function App() {
+function HomePage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -60,7 +65,7 @@ function App() {
     // TODO: Fire Meta Pixel Lead and Google Ads conversion events
     // only after the lead has been successfully accepted.
 
-    setSubmitted(true);
+    navigate("/thank-you");
   };
 
   const scrollToForm = () => {
@@ -379,27 +384,6 @@ function App() {
                     required
                   />
 
-                  <label htmlFor="email">
-                    Email Address <span>(Optional)</span>
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="Enter your email address"
-                    autoComplete="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-
-                  <label className="consent">
-                    <input type="checkbox" required />
-                    <span>
-                      I agree to the Terms &amp; Conditions and Privacy
-                      Policy.
-                    </span>
-                  </label>
-
                   <button
                     className="button button-primary submit-button"
                     type="submit"
@@ -438,6 +422,17 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/thank-you" element={<Thank />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
