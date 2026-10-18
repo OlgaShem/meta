@@ -64,6 +64,15 @@ function HomePage() {
       window.fbq("track", "Lead");
     }
 
+ // Google Ads: conversion event
+  if (typeof window.gtag === "function") {
+    window.gtag("event", "conversion", {
+      send_to: "AW-785839830/SacqCMe2waEdENbt2_YC",
+      value: 1.0,
+      currency: "UAH",
+    });
+  }
+
     navigate("/thank-you");
   };
 
