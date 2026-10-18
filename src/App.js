@@ -59,11 +59,10 @@ function HomePage() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Demo only: connect your backend or CRM to store leads.
-    console.log("Lead submitted");
-
-    // TODO: Fire Meta Pixel Lead and Google Ads conversion events
-    // only after the lead has been successfully accepted.
+      // Meta Pixel: track lead
+    if (typeof window.fbq === "function") {
+      window.fbq("track", "Lead");
+    }
 
     navigate("/thank-you");
   };
