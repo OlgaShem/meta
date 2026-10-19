@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ThankYou.css";
 
 function Thank() {
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "lead",
+    });
+  }, []);
+
   return (
     <main className="thank-page">
       <a href="/" className="thank-logo">
