@@ -46,38 +46,51 @@ function HomePage() {
   const navigate = useNavigate();
 
   
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
 
-    const trackingKeys = [
-      "utm_source",
-      "utm_medium",
-      "utm_campaign",
-      "utm_content",
-      "utm_term",
-      "gclid",
-      "fbclid",
-      "wbraid",
-      "gbraid",
-    ];
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
 
-    const hasTrackingParams = trackingKeys.some((key) =>
-      params.has(key)
+  const trackingKeys = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+    "gclid",
+    "fbclid",
+    "wbraid",
+    "gbraid",
+  ];
+
+  const hasTrackingParams = trackingKeys.some((key) =>
+    params.has(key)
+  );
+
+  let tracking = {};
+
+  if (hasTrackingParams) {
+    trackingKeys.forEach((key) => {
+      tracking[key] = params.get(key) || "";
+    });
+
+    sessionStorage.setItem(
+      "landingTracking",
+      JSON.stringify(tracking)
     );
+  } else {
+    tracking = JSON.parse(
+      sessionStorage.getItem("landingTracking") || "{}"
+    );
+  }
 
-    if (hasTrackingParams) {
-      const tracking = {};
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "page_view",
+    page_path: window.location.pathname,
+    ...tracking,
+  });
+}, []);
 
-      trackingKeys.forEach((key) => {
-        tracking[key] = params.get(key) || "";
-      });
-
-      sessionStorage.setItem(
-        "landingTracking",
-        JSON.stringify(tracking)
-      );
-    }
-  }, []);
 
   const [formData, setFormData] = useState({
     name: "",
