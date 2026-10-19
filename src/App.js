@@ -92,7 +92,12 @@ useEffect(() => {
     ...tracking,
   });
   sendToGoogleSheets("page_view");
+  if (typeof window.fbq === "function") {
+  window.fbq("track", "PageView");
+}
 }, []);
+
+
 
 
   const [formData, setFormData] = useState({
