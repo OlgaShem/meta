@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import AdsPage from "./AdsPage";
 import Thank from "./ThankYou";
 
+import { sendToGoogleSheets } from "./tracking";
+
 
 
 const benefits = [
@@ -89,6 +91,7 @@ useEffect(() => {
     page_path: window.location.pathname,
     ...tracking,
   });
+  sendToGoogleSheets("page_view");
 }, []);
 
 
@@ -124,6 +127,11 @@ const handleSubmit = (event) => {
     event: "lead",
     ...tracking,
   });
+
+  sendToGoogleSheets("lead", {
+  name: formData.name,
+  phone: formData.phone,
+});
 
   // Meta Pixel: track lead
   if (typeof window.fbq === "function") {
