@@ -3,10 +3,10 @@ import "./AdsPage.css";
 
 const AdsPage = () => {
   const googleUrl =
-    "/?utm_source=google&utm_medium=cpc&utm_campaign=test_campaign&gclid=TEST_GCLID_GOOGLE_001";
+     "/landing?utm_source=google&utm_medium=cpc&utm_campaign=test_campaign&gclid=TEST_GCLID_GOOGLE_001";
 
   const facebookUrl =
-    "/?utm_source=facebook&utm_medium=paid_social&utm_campaign=test_campaign&fbclid=TEST_FBCLID_001";
+    "/landing?utm_source=facebook&utm_medium=paid_social&utm_campaign=test_campaign&fbclid=TEST_FBCLID_001";
 
   return (
     <main className="ads-page">
