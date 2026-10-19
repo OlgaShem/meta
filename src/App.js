@@ -468,7 +468,12 @@ const handleSubmit = (event) => {
                     placeholder="Enter your phone number"
                     autoComplete="tel"
                     value={formData.phone}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        phone: e.target.value.replace(/\D/g, ""),
+                      });
+                    }}
                     required
                   />
 
