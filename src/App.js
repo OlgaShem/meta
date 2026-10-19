@@ -491,9 +491,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/ads" element={<AdsPage />} />
-        <Route path="/thank-you" element={<Thank />} />
+          <Route path="/" element={<AdsPage />} />
+          <Route path="/landing" element={<HomePage />} />
+          <Route path="/thank-you" element={<Thank />} />
+          <Route path="/ads" element={<AdsPage />} />
       </Routes>
     </BrowserRouter>
   );
