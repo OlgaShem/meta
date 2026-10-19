@@ -1,10 +1,15 @@
 
 import { useState } from "react";
+import { useEffect } from "react";
+
 import "./App.css";
 
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
+import AdsPage from "./AdsPage";
 import Thank from "./ThankYou";
+
+
 
 const benefits = [
   {
@@ -39,6 +44,41 @@ const benefits = [
 
 function HomePage() {
   const navigate = useNavigate();
+
+  
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    const trackingKeys = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_content",
+      "utm_term",
+      "gclid",
+      "fbclid",
+      "wbraid",
+      "gbraid",
+    ];
+
+    const hasTrackingParams = trackingKeys.some((key) =>
+      params.has(key)
+    );
+
+    if (hasTrackingParams) {
+      const tracking = {};
+
+      trackingKeys.forEach((key) => {
+        tracking[key] = params.get(key) || "";
+      });
+
+      sessionStorage.setItem(
+        "landingTracking",
+        JSON.stringify(tracking)
+      );
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -56,15 +96,28 @@ function HomePage() {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
 
-      // Meta Pixel: track lead
-    if (typeof window.fbq === "function") {
-      window.fbq("track", "Lead");
-    }
+const handleSubmit = (event) => {
+  event.preventDefault();
 
- // Google Ads: conversion event
+  // Get saved attribution data
+  const tracking = JSON.parse(
+    sessionStorage.getItem("landingTracking") || "{}"
+  );
+
+  // Send Lead event and attribution data to GTM
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "lead",
+    ...tracking,
+  });
+
+  // Meta Pixel: track lead
+  if (typeof window.fbq === "function") {
+    window.fbq("track", "Lead");
+  }
+
+  // Google Ads: conversion event
   if (typeof window.gtag === "function") {
     window.gtag("event", "conversion", {
       send_to: "AW-785839830/SacqCMe2waEdENbt2_YC",
@@ -73,8 +126,9 @@ function HomePage() {
     });
   }
 
-    navigate("/thank-you");
-  };
+  navigate("/thank-you");
+};
+
 
   const scrollToForm = () => {
     document.getElementById("lead-form")?.scrollIntoView({
@@ -438,6 +492,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/ads" element={<AdsPage />} />
         <Route path="/thank-you" element={<Thank />} />
       </Routes>
     </BrowserRouter>

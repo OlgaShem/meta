@@ -1,0 +1,206 @@
+
+.ads-page {
+  min-height: 100vh;
+  padding: 32px 6%;
+  background: #f4f6fb;
+  color: #172033;
+  font-family: Arial, sans-serif;
+}
+
+.ads-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.ads-logo {
+  color: #172033;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.ads-intro {
+  max-width: 650px;
+  margin: 64px auto 40px;
+  text-align: center;
+}
+
+.ads-eyebrow {
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.ads-intro h1 {
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.1;
+  margin: 16px 0;
+}
+
+.ads-intro p {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.ads-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.ad-card {
+  overflow: hidden;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 12px 36px #1720330c;
+}
+
+.ad-platform {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.google-mark,
+.facebook-mark {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.google-mark {
+  color: #4285f4;
+  background: #edf4ff;
+}
+
+.facebook-mark {
+  color: white;
+  background: #1877f2;
+}
+
+.google-visual,
+.facebook-visual {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px;
+  color: white;
+}
+
+.google-visual {
+  background: linear-gradient(135deg, #1768e5, #65b5ff);
+}
+
+.facebook-visual {
+  background: linear-gradient(135deg, #103b91, #1877f2);
+}
+
+.google-visual span,
+.facebook-visual span {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+.google-visual h2,
+.facebook-visual h2 {
+  font-size: clamp(23px, 3vw, 32px);
+  line-height: 1.1;
+  margin: 18px 0 8px;
+}
+
+.google-visual p,
+.facebook-visual p {
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.ad-copy {
+  padding: 24px;
+}
+
+.ad-sponsored {
+  color: #64748b;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ad-copy h3 {
+  margin: 12px 0 8px;
+  font-size: 20px;
+}
+
+.ad-copy p {
+  min-height: 42px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ad-button {
+  display: block;
+  padding: 14px 18px;
+  margin-top: 22px;
+  border-radius: 9px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.ad-button:hover {
+  opacity: 0.85;
+}
+
+.google-button {
+  background: #1768e5;
+}
+
+.facebook-button {
+  background: #1877f2;
+}
+
+.ads-footer {
+  padding: 40px 0 16px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .ads-page {
+    padding: 22px 16px;
+  }
+
+  .ads-intro {
+    margin: 44px auto 28px;
+  }
+
+  .ads-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .google-visual,
+  .facebook-visual {
+    min-height: 190px;
+  }
+}
